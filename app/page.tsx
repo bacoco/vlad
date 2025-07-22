@@ -7,9 +7,12 @@ import { WeatherDisplay } from '@/components/WeatherDisplay'
 import { WeatherSkeleton } from '@/components/WeatherSkeleton'
 import { DailyForecast } from '@/components/DailyForecast'
 import { WeatherTabs } from '@/components/WeatherTabs'
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { WeatherBackground } from '@/components/WeatherBackground'
 import { MobileHeader, MobileDrawer } from '@/components/MobileHeader'
 import { LocationService, Location } from '@/lib/location.service'
 import { useWeather } from '@/components/providers/WeatherProvider'
+import { useTheme } from '@/components/providers/ThemeProvider'
 import { APP_CONFIG } from '@/lib/constants'
 
 export default function HomePage() {
@@ -17,6 +20,7 @@ export default function HomePage() {
   const [isInitialized, setIsInitialized] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
+  const { resolvedTheme } = useTheme()
   const { 
     currentLocation, 
     weatherData, 
@@ -100,19 +104,25 @@ export default function HomePage() {
 
   return (
     <>
+      <WeatherBackground weather={weatherData?.current || null} resolvedTheme={resolvedTheme} />
+      
       <MobileHeader
         currentLocation={currentLocation}
         onMenuClick={() => setIsMobileMenuOpen(true)}
         onSearchClick={() => setIsMobileSearchOpen(true)}
       />
       
-      <main className="min-h-screen bg-gray-50 pb-6">
+      <main className="min-h-screen bg-background dark:bg-background pb-6 relative">
         <div className="container mx-auto px-4 py-6 max-w-4xl">
           {/* Desktop Header */}
           <header className="hidden md:block mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">
-              Weather PWA
-            </h1>
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-10" /> {/* Spacer for centering */}
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">
+                Weather PWA
+              </h1>
+              <ThemeToggle />
+            </div>
             
             {/* Location Search */}
             <LocationSearch
@@ -123,7 +133,7 @@ export default function HomePage() {
 
           {/* Mobile Search Modal */}
           {isMobileSearchOpen && (
-            <div className="md:hidden fixed inset-0 z-50 bg-white">
+            <div className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-900">
               <div className="p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold">Search Location</h2>
@@ -150,7 +160,7 @@ export default function HomePage() {
         {/* Current Weather Section */}
         <section className="mb-8">
           {currentLocation && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-card dark:bg-card rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">

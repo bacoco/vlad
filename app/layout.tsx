@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { WeatherProvider } from '@/components/providers/WeatherProvider'
 import './globals.css'
 
@@ -30,11 +31,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <WeatherProvider>
-          {children}
-        </WeatherProvider>
+        <ThemeProvider>
+          <WeatherProvider>
+            {children}
+          </WeatherProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
