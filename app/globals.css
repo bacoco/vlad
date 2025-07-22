@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 32 33 36;
+    --card: 248 249 250;
+    --card-foreground: 32 33 36;
+    --primary: 66 133 244;
+    --primary-foreground: 255 255 255;
+    --secondary: 95 99 104;
+    --secondary-foreground: 255 255 255;
+    --muted: 241 243 244;
+    --muted-foreground: 95 99 104;
+    --border: 218 220 224;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 32 33 36;
+    --foreground: 232 234 237;
+    --card: 41 42 43;
+    --card-foreground: 232 234 237;
+    --primary: 138 180 248;
+    --primary-foreground: 32 33 36;
+    --secondary: 154 160 166;
+    --secondary-foreground: 32 33 36;
+    --muted: 60 64 67;
+    --muted-foreground: 154 160 166;
+    --border: 60 64 67;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .weather-gradient {
+    background: linear-gradient(to bottom, #87ceeb 0%, #98d8e8 100%);
+  }
+  
+  .weather-gradient-dark {
+    background: linear-gradient(to bottom, #1e3a8a 0%, #2563eb 100%);
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
