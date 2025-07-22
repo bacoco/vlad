@@ -18,7 +18,7 @@ export default function Error({
       <div className="text-center p-8">
         <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
         <p className="text-muted-foreground mb-6">
-          We're having trouble loading the weather data.
+          We&apos;re having trouble loading the weather data.
         </p>
         <button
           onClick={reset}

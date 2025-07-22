@@ -89,7 +89,7 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
       fetchWeatherData(currentLocation)
       updatePreferences({ lastViewedLocation: currentLocation.id })
     }
-  }, [currentLocation, fetchWeatherData])
+  }, [currentLocation, fetchWeatherData, updatePreferences])
 
   // Auto-refresh weather data
   useEffect(() => {

@@ -54,7 +54,7 @@ export default function HomePage() {
     }
     
     setIsInitialized(true)
-  }, [])
+  }, [setCurrentLocation])
 
   const handleLocationSelect = (location: Location) => {
     setCurrentLocation(location)
