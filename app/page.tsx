@@ -5,6 +5,8 @@ import { LocationSearch } from '@/components/LocationSearch'
 import { LocationList } from '@/components/LocationList'
 import { WeatherDisplay } from '@/components/WeatherDisplay'
 import { WeatherSkeleton } from '@/components/WeatherSkeleton'
+import { DailyForecast } from '@/components/DailyForecast'
+import { WeatherTabs } from '@/components/WeatherTabs'
 import { MobileHeader, MobileDrawer } from '@/components/MobileHeader'
 import { LocationService, Location } from '@/lib/location.service'
 import { useWeather } from '@/components/providers/WeatherProvider'
@@ -213,6 +215,33 @@ export default function HomePage() {
             </div>
           )}
         </section>
+
+        {/* Weather Forecast Section */}
+        {weatherData && currentLocation && (
+          <>
+            {/* Hourly Forecast with Tabs */}
+            <section className="mb-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Hourly Forecast
+              </h2>
+              <WeatherTabs 
+                hourlyForecasts={weatherData.hourly}
+                temperatureUnit={preferences.temperatureUnit}
+              />
+            </section>
+
+            {/* Daily Forecast */}
+            <section className="mb-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                7-Day Forecast
+              </h2>
+              <DailyForecast 
+                forecasts={weatherData.daily}
+                temperatureUnit={preferences.temperatureUnit}
+              />
+            </section>
+          </>
+        )}
 
         {/* Saved Locations - Desktop Only */}
         <section className="hidden md:block">
